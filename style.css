@@ -1,0 +1,682 @@
+/* === Fuentes y Reset Básico === */
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+    
+    /* Fondo Sólido y Nítido */
+    background-color: #f8f8f8; 
+}
+
+/* Keyframe para el Lazo Pulsar */
+@keyframes lazoPulsar {
+    0% { transform: scale(1) rotate(15deg); opacity: 0.8; }
+    50% { transform: scale(1.05) rotate(15deg); opacity: 1; }
+    100% { transform: scale(1) rotate(15deg); opacity: 0.8; }
+}
+
+/* === Encabezado de Fundación (Lazos) === */
+#cabecera-fundacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 15px;
+    padding-top: 10px;
+}
+
+.nombre-fundacion-centrado {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #333;
+    margin: 0 20px;
+    line-height: 1.2;
+}
+
+.lazos-decoracion { display: flex; gap: 8px; }
+
+.lazo-item {
+    display: block;
+    width: 15px;
+    height: 35px;
+    border-radius: 2px;
+    transform: rotate(15deg);
+    opacity: 0.8;
+    animation: lazoPulsar 2s infinite alternate ease-in-out;
+}
+
+/* Colores de Lazos */
+.lazo-rosa { background-color: #ff69b4; }
+.lazo-azul { background-color: #0000ff; }
+.lazo-dorado { background-color: #ffd700; }
+.lazo-amarillo { background-color: #ffff00; }
+.lazo-lila { background-color: #c8a2c8; }
+.lazo-verde { background-color: #008000; }
+
+/* === Mensaje de Apoyo e Información de Precio === */
+.apoyo-mensaje {
+    font-size: 1.1em;
+    color: #444;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+#info-precio-tasa {
+    margin: 15px 0 25px 0;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+#info-precio-tasa h2 {
+    font-size: 1.2em; 
+    font-weight: 600;
+    color: #444;
+    margin: 5px 0;
+}
+#info-precio-tasa h2 span {
+    color: #008000;
+    font-weight: 700;
+}
+#tasa-bcv-display {
+    color: #0056b3;
+}
+
+/* === Título Principal (h1) [ESTÁTICO] === */
+h1 {
+    font-size: 2.5em;
+    color: #c2185b;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+h1 span {
+    font-size: 0.5em;
+    display: block;
+    color: #555;
+    font-weight: 400;
+}
+
+
+/* === Talonario de Números === */
+#talonario-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.numero-item {
+    font-size: 1.3em;
+    font-weight: 700;
+    padding: 12px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Colores de Estado de los Números --- */
+.disponible {
+    background-color: #C2185B; /* Rosado Oscuro */
+    color: #fff;
+}
+.reservado {
+    background-color: #f0ad4e; /* Naranja */
+    color: #fff;
+}
+.por-verificar {
+    background-color: #007bff; /* Azul */
+    color: #fff;
+}
+.pagado {
+    background-color: #5cb85c; /* Verde de Éxito */
+    color: #fff;
+}
+
+/* --- Efectos Hover (Al pasar el mouse) --- */
+.disponible:hover {
+    background-color: #A9154E;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(194, 24, 91, 0.4);
+}
+.reservado:hover, 
+.pagado:hover, 
+.por-verificar:hover { 
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+}
+
+/* === Modal y Formulario de Reserva === */
+#modal-formulario {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo modal más oscuro */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+#modal-formulario.show {
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 16px; /* Bordes más redondeados */
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh; 
+    overflow-y: auto; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Sombra más profunda */
+    position: relative;
+    text-align: left;
+}
+
+.modal-content h2 {
+    color: #c2185b; /* Color principal */
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.modal-content h2 #numero-seleccionado {
+    color: #000;
+    font-size: 1.2em;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 3em; 
+    color: #d9534f; 
+    cursor: pointer;
+    line-height: 0.7;
+    transition: color 0.2s, transform 0.2s;
+}
+.close-modal:hover { 
+    color: #c9302c; 
+    transform: rotate(90deg); 
+}
+
+.form-group, .radio-group {
+    margin-bottom: 20px; 
+}
+.form-group label, .radio-group legend {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700; 
+    color: #333;
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 14px 10px; 
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #ff69b4; 
+    box-shadow: 0 0 8px rgba(255, 105, 180, 0.5); 
+    outline: none;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+.radio-group label {
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 18px; 
+    font-size: 1.2em; 
+    font-weight: 800; 
+    color: #fff;
+    background-color: #c2185b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 15px rgba(194, 24, 91, 0.3); 
+}
+.btn-submit:hover {
+    background-color: #A9154E;
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 20px rgba(194, 24, 91, 0.5);
+}
+
+/* === Estilos para el Cuadro de Pago Móvil === */
+.pago-movil-box {
+    background-color: #fff3e0; 
+    border: 3px dashed #ff9800; 
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+    text-align: left;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s;
+}
+.pago-movil-box h3 {
+    color: #d84315; 
+    margin-top: 0;
+    font-size: 1.3em;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+.pago-movil-box .calculo-pago {
+    font-size: 0.95em;
+    color: #333;
+    margin-bottom: 15px;
+}
+.pago-movil-box .calculo-pago strong {
+    color: #c2185b; 
+}
+
+.pago-info-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr; 
+    gap: 8px 15px;
+    margin: 10px 0;
+    font-size: 0.95em;
+}
+.pago-info-grid label {
+    font-weight: 700;
+    color: #000;
+}
+.pago-info-grid .info-data {
+    font-weight: 700;
+    color: #000;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === ESTILOS PARA LOS MODALES DE ADMINISTRACIÓN Y ÉXITO === */
+
+.admin-modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    text-align: center;
+}
+
+.admin-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 2em;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+.admin-close-btn:hover {
+    color: #333;
+}
+
+/* Indicador de Estado (Para el modal de Admin) */
+.status-indicator {
+    font-weight: 700;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+/* Estilos de Botones (Reutilizados en todos los modales dinámicos) */
+.admin-btn {
+    padding: 10px 20px;
+    margin: 8px 5px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    width: 90%;
+    max-width: 300px;
+}
+.primary-btn {
+    background-color: #007bff;
+    color: white;
+}
+.primary-btn:hover {
+    background-color: #0056b3;
+}
+.success-btn {
+    background-color: #5cb85c;
+    color: white;
+}
+.success-btn:hover {
+    background-color: #4cae4c;
+}
+.danger-btn {
+    background-color: #d9534f;
+    color: white;
+}
+.danger-btn:hover {
+    background-color: #c9302c;
+}
+.secondary-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+.secondary-btn:hover {
+    background-color: #ccc;
+}
+
+/* Estilo del input de contraseña */
+#admin-password-input, #admin-confirm-password {
+    width: 90%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Estilos de caja por estado del Admin */
+#admin-login-box, #admin-options-box, #admin-confirm-box, #admin-info-box {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid #eee;
+}
+#admin-options-box {
+    background-color: #f9f9f9;
+}
+
+/* === NUEVOS ESTILOS PARA RADIO BUTTONS PERSONALIZADOS (RESERVA/PAGO) === */
+
+/* Contenedor de las opciones (Alineación en columna o fila) */
+.radio-buttons-custom .radio-option-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que salte de línea en móviles */
+    gap: 15px;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Estilo Base del Botón/Label */
+.custom-radio-label {
+    flex-grow: 1; 
+    padding: 15px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    min-width: 45%; 
+}
+
+.custom-radio-label span {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.custom-radio-label small {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+/* Estilos para la opción RESERVADO (Naranja) */
+.reserved-option {
+    background-color: #fffaf0; 
+    color: #cc7800; 
+    border-color: #f0ad4e;
+}
+.reserved-option:hover {
+    background-color: #fce8cd;
+}
+
+/* Estilos para la opción PAGADO (Azul) */
+.paid-option {
+    background-color: #e6f0ff; 
+    color: #0056b3; 
+    border-color: #007bff;
+}
+.paid-option:hover {
+    background-color: #c9e0ff;
+}
+
+/* Estilo cuando el radio button ESTÁ SELECCIONADO (El color es más fuerte y la sombra lo destaca) */
+.radio-buttons-custom input[type="radio"]:checked + .custom-radio-label {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.radio-buttons-custom input[type="radio"]:checked + .reserved-option {
+    background-color: #f0ad4e; 
+    color: #fff;
+}
+
+.radio-buttons-custom input[type="radio"]:checked + .paid-option {
+    background-color: #007bff; 
+    color: #fff;
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 480px) {
+    .radio-buttons-custom .radio-option-container {
+        flex-direction: column;
+    }
+    .custom-radio-label {
+        min-width: 100%; 
+    }
+}
+
+/* === ESTILOS DEL PRELOADER (Carga Inicial - Emojis) === */
+
+#preloader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8; 
+    z-index: 3000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Transición más larga para que la desaparición sea más notoria */
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out; 
+}
+
+.preloader-content {
+    text-align: center;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+}
+
+.emoji-animado {
+    font-size: 3em; 
+    margin-bottom: 15px;
+    animation: pulseEmoji 2s infinite ease-in-out; 
+    display: inline-block; 
+}
+
+@keyframes pulseEmoji {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+.preloader-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #c2185b; 
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.preloader-content p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Spinner de Carga */
+.spinner-loading {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #c2185b; 
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 15px auto 0;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Clase para ocultar el preloader */
+.loaded {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* --- Estilos para el Tooltip Dinámico (Números Ocupados) --- */
+
+/* 1. Posicionamiento: Solo los números ocupados (no disponibles) tienen posición relativa */
+.numero-item[data-estado]:not(.disponible) {
+    position: relative;
+    cursor: help !important; 
+}
+
+/* 2. Efecto Hover: Sutil levantamiento al pasar el ratón */
+.numero-item[data-estado]:not(.disponible):hover {
+    transform: translateY(-2px) scale(1.03) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+/* 3. Base del Tooltip (El cuadro de texto) */
+.numero-item[data-estado]:not(.disponible)::after {
+    /* Ocultar y posicionar */
+    content: attr(data-tooltip); /* <<-- CLAVE: Trae el texto de JavaScript */
+    position: absolute;
+    bottom: 100%; 
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px); 
+    
+    /* Estilos de visualización */
+    background-color: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 10;
+    
+    /* Control de visibilidad/animación */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* 4. Triángulo (puntero) del Tooltip */
+.numero-item[data-estado]:not(.disponible)::before {
+    /* Ocultar y posicionar */
+    content: '';
+    position: absolute;
+    bottom: 100%; 
+    left: 50%;
+    transform: translateX(-50%) translateY(3px);
+    
+    /* Estilos del puntero */
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333; /* Color de fondo del tooltip */
+    z-index: 10;
+    
+    /* Control de visibilidad/animación */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+/* 5. Mostrar Tooltip al hacer hover */
+.numero-item[data-estado]:not(.disponible):hover::after,
+.numero-item[data-estado]:not(.disponible):hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px); /* Subir al mostrar el texto */
+}
+
+
+/* --- Colores Específicos para el Tooltip --- */
+
+.reservado:hover::after {
+    background-color: #f0ad4e !important; /* Naranja */
+}
+.reservado:hover::before {
+    border-top-color: #f0ad4e !important;
+}
+
+.por-verificar:hover::after {
+    background-color: #007bff !important; /* Azul */
+}
+.por-verificar:hover::before {
+    border-top-color: #007bff !important;
+}
+
+.pagado:hover::after {
+    background-color: #5cb85c !important; /* Verde */
+}
+.pagado:hover::before {
+    border-top-color: #5cb85c !important;
+}
