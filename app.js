@@ -5,11 +5,6 @@ const SUPABASE_URL = 'https://rfetptbdzkmghvyhulje.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmZXRwdGJkemttZ2h2eWh1bGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI2MTg2NDYsImV4cCI6MjA3ODE5NDY0Nn0.hPnuVcVMkfuDJK32a701pQ0msf0qJat9asnHnuAhkGM';
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// --- 2. DATOS DE LA FUNDACIÓN (¡ACTUALIZA ESTOS DATOS!) ---
-const CLAVE_ADMIN = "Geneluchi06102025"; 
-const FUNDACION_TELEFONO = "04142629169"; // 👈 COLOCA AQUÍ EL NÚMERO REAL
-const FUNDACION_BANCO = "Banco de Venezuela"; // 👈 COLOCA AQUÍ EL BANCO REAL
-const FUNDACION_CEDULA = "J-501657513"; // 👈 COLOCA AQUÍ EL RIF/CÉDULA REAL
 // --- 2. DATOS DE LA FUNDACIÓN (¡ACTUALIZA ESTO!) ---
 const CLAVE_ADMIN = "Geneluchi102025";
 const FUNDACION_TELEFONO = "04142629169"; 
@@ -80,7 +75,8 @@ const opcionesReservaCloseBtn = document.querySelector('.opciones-reserva-close-
 const opcionesReservaNumeroDisplay = document.getElementById('opciones-reserva-numero');
 const btnReportarPago = document.getElementById('btn-reportar-pago');
 const btnAdminReserva = document.getElementById('btn-admin-reserva');
-const btnCancelarOpciones = document.getElementById('btn-cancelar-reserva-opciones');
+// FIX: Separada la declaración de la siguiente constante para evitar el error de sintaxis.
+const btnCancelarOpciones = document.getElementById('btn-cancelar-reserva-opciones'); 
 
 // --- REFERENCIAS NUEVAS PARA EL MODAL DE RECORDATORIO ---
 const recordatorioModal = document.getElementById('recordatorio-modal');
@@ -659,7 +655,6 @@ successModal.addEventListener('click', (event) => {
         closeSuccessModal();
     }
 });
-
 opcionesReservaCloseBtn.addEventListener('click', closeOpcionesReservaModal);
 btnCancelarOpciones.addEventListener('click', closeOpcionesReservaModal);
 btnAdminReserva.addEventListener('click', () => {
