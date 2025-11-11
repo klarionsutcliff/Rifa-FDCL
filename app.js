@@ -21,7 +21,7 @@ const DATOS_PAGO_FUNDACION = `
             <strong>🆔 Cédula/RIF:</strong> ${FUNDACION_CEDULA}
         </li>
         <li>
-            <strong>📱 Teléfono Pago Móvil:</strong> ${FUNDACION_TELEFONO}
+            <strong>📱 Teléfono:</strong> ${FUNDACION_TELEFONO}
         </li>
     </ul>
 `;
@@ -214,9 +214,9 @@ function showSuccessModal(numero, estado) {
             </p>
             ${DATOS_PAGO_FUNDACION}
             <p style="font-size: 0.9em; color: #333; margin-top: 15px;">
-                Luego de realizar el pago, puedes volver a presionar el número ${numeroFormateado} y usar la opción de "Reportar Pago" para pasarlo a Verificando Pago.
-                Asi como, puedes tomar capture a los datos de Pago Móvil para tenerlos a la mano. 
-                No olvides enviar tu comprobante de pago conjuntamente a tu Nombre y Apellido al número antes mencionado.
+                Luego de realizar el pago, puedes volver a presionar el número ${numeroFormateado} y usar la opción de "Reportar Pago".
+                ¡Puedes tomar capture a los datos de Pago Móvil para tenerlos a la mano. 
+                No olvides enviar tu comprobante de pago conjuntamente a tu Nombre y Apellido al número que aparece en pantalla.
                 ¡Mucha suerte! 
             </p>
         `;
