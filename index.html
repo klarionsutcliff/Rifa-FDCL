@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gran Rifa Solidaria - Fundación Compañeros de Lucha</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
-    
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
     <div id="preloader-overlay">
         <div class="preloader-content">
-            
             <div class="emoji-animado">🎗️</div>
-            
             <h3 class="preloader-title">Cargando...</h3>
             <p>Fundación Compañeros de Lucha</p>
             <div class="spinner-loading"></div>
@@ -34,147 +30,163 @@
             <span class="lazo-item lazo-verde"></span>
         </div>
     </header>
-
     <main>
-        
         <h1>
             Gran Rifa Solidaria
-            <span>Apoyóyennos en la Lucha Contra el Cáncer</span>
+            <span>Apóyennos en la Lucha contra el Cáncer</span>
         </h1>
-        
         <div id="info-precio-tasa">
-            <h2><span>💵 $3 USD</span></h2>
+            <h2><span>💵 $5 USD</span></h2>
             <h2 id="tasa-bcv-display">💹 Tasa Oficial BCV</h2>
         </div>
         <div id="cargando-mensaje">Cargando números...</div>
         <div id="talonario-container">
         </div>
     </main>
-
     <div id="modal-formulario">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2>Reservar Número: <span id="numero-seleccionado">0000</span></h2>
-            <p>Por favor, completa tus datos para la reserva o pago de tu número.</p>
-
+            <p>Por favor, completa tus datos para la reserva o pago.</p>
             <form id="formulario-reserva">
                 <input type="hidden" id="numero-id-hidden">
-
                 <div class="form-group">
                     <label for="nombre_apellido">Nombre y Apellido:</label>
                     <input type="text" id="nombre_apellido" required>
                 </div>
-                
                 <div class="form-group">
                     <label for="telefono">Teléfono (WhatsApp):</label>
                     <input type="tel" id="telefono" required>
                 </div>
-
                 <div class="form-group">
                     <label for="correo_electronico">Correo Electrónico:</label>
                     <input type="email" id="correo_electronico">
                 </div>
-                
-                <div class="form-group">
-                    <label for="edad">Edad:</label>
-                    <input type="number" id="edad" min="18" max="99" required>
-                </div>
-
                 <fieldset class="form-group radio-group radio-buttons-custom">
                     <legend>Estado del Número</legend>
-                    
                     <div class="radio-option-container">
                         <input type="radio" id="estado-reservado" name="estado" value="reservado" checked hidden>
                         <label for="estado-reservado" class="custom-radio-label reserved-option">
                             <span>🧡 Reservar</span>
                             <small>Pagaré después</small>
                         </label>
-                        
                         <input type="radio" id="estado-pagado" name="estado" value="pagado" hidden>
                         <label for="estado-pagado" class="custom-radio-label paid-option">
                             <span>🔵 Pagado</span>
-                            <small>Pagaré justo ahora</small>
+                            <small>Reportar pago ahora</small>
                         </label>
                     </div>
                 </fieldset>
-                <div id="datos-pago-movil" class="pago-movil-box" style="display: none;"> 
+                <div id="datos-pago-movil" class="pago-movil-box" style="display: none;">
                     <h3>Detalles de Pago Móvil</h3>
-                    
-                    <p class="calculo-pago"> 
-                        <strong>💵 $3 USD</strong> | 
-                        <span id="tasa-bcv-simple-display"> 💹Tasa Oficial BCV</span>
+                    <p class="calculo-pago">
+                        <strong>💵 $5 USD</strong> |
+                        <span id="tasa-bcv-simple-display">💹 Tasa Oficial BCV</span>
                     </p>
-
                     <div class="pago-info-grid">
                         <label>Banco:</label>
                         <span class="info-data">Banco de Venezuela</span>
-
                         <label>RIF/Cédula:</label>
                         <span class="info-data">J-501657513</span>
-
                         <label>Teléfono:</label>
-                        <span class="info-data">04241515438</span>
+                        <span class="info-data">04142629169</span>
                     </div>
-                    
                     <div class="form-group">
                         <label for="referencia-pago">N° de Referencia/Transacción:</label>
-                        <input type="text" id="referencia-pago" required> 
+                        <input type="text" id="referencia-pago" required>
                     </div>
                 </div>
-
                 <button type="submit" class="btn-submit">Confirmar Participación</button>
             </form>
         </div>
     </div>
-    
     <div id="admin-modal" class="admin-modal-overlay">
         <div class="admin-modal-content">
             <span class="admin-close-btn">&times;</span>
             <h2 id="admin-modal-title">Gestión de Número: <span id="admin-numero-display">0000</span></h2>
             <p id="admin-modal-status" class="status-indicator">Estado Actual: PAGO PENDIENTE</p>
-            
             <div id="admin-login-box">
-                <p>¿Eres administrador? Introduce la clave para continuar:</p>
+                <p>Introduce la clave de administrador para continuar:</p>
                 <input type="password" id="admin-password-input" placeholder="Clave de Administrador">
                 <button id="admin-login-btn" class="admin-btn primary-btn">Acceder</button>
             </div>
-
             <div id="admin-options-box" style="display: none;">
                 <p>Selecciona una acción para el número <strong id="admin-numero-opcion"></strong>:</p>
-                <button id="admin-liberar-btn" class="admin-btn danger-btn">Liberar (Hacer Disponible)</button>
-                <button id="admin-verificar-btn" class="admin-btn success-btn">Confirmar Pago (Marcar Pagado)</button>
-                <button id="admin-cancel-btn" class="admin-btn secondary-btn">Cancelar</button>
+                <button id="admin-liberar-btn" class="admin-btn danger-btn">1. Liberar (Hacer Disponible)</button>
+                <button id="admin-verificar-btn" class="admin-btn success-btn">2. Confirmar Pago (Hacer Pagado)</button>
+                <button id="admin-cancel-btn" class="admin-btn secondary-btn">3. Cancelar</button>
             </div>
-            
             <div id="admin-confirm-box" style="display: none;">
                 <p id="admin-confirm-text"></p>
                 <input type="password" id="admin-confirm-password" placeholder="Reingresa la clave para confirmar">
-                <button id="admin-action-confirm-btn" class="admin-btn primary-btn">Confirmar</button>
+                <button id="admin-action-confirm-btn" class="admin-btn primary-btn">Confirmar Acción</button>
                 <button id="admin-confirm-cancel-btn" class="admin-btn secondary-btn">Cancelar</button>
             </div>
-
             <div id="admin-info-box" style="display: none;">
                 <p id="admin-info-text"></p>
                 <button id="admin-info-close-btn" class="admin-btn primary-btn">Aceptar</button>
             </div>
-
         </div>
     </div>
-
+    <div id="pago-reserva-modal" class="admin-modal-overlay">
+        <div class="admin-modal-content">
+            <span class="pago-reserva-close-btn admin-close-btn">&times;</span>
+            <h2 style="color: #007bff;">Reportar Pago del Número: <span id="pago-reserva-numero">0000</span></h2>
+            <p>Utiliza esta opción para reportar tu pago y asegurar tu número.</p>
+            <form id="formulario-reporte-pago">
+                <input type="hidden" id="pago-reserva-id-hidden">
+                <div id="datos-pago-movil-reserva" class="pago-movil-box">
+                    <h3>Detalles de Pago Móvil</h3>
+                    <p class="calculo-pago">
+                        <strong>💵 $5 USD</strong> |
+                        <span id="tasa-bcv-reserva-display">💹 Tasa Oficial BCV</span>
+                    </p>
+                    <div class="pago-info-grid">
+                        <label>Banco:</label>
+                        <span class="info-data">Banco de Venezuela</span>
+                        <label>RIF/Cédula:</label>
+                        <span class="info-data">J-501657513</span>
+                        <label>Teléfono:</label>
+                        <span class="info-data">04142629169</span>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="referencia-pago-reserva">N° de Referencia/Transacción:</label>
+                        <input type="text" id="referencia-pago-reserva" required>
+                    </div>
+                </div>
+                <button type="submit" class="admin-btn primary-btn" style="width: 100%; max-width: 100%;">Confirmar Pago y Notificar al Administrador</button>
+            </form>
+        </div>
+    </div>
     <div id="success-modal" class="admin-modal-overlay">
         <div class="admin-modal-content">
             <h2 id="success-modal-title" style="color: #c2185b;">¡Participación Confirmada!</h2>
             <div id="success-modal-icon" style="font-size: 4em; margin: 15px 0;"></div>
             <p id="success-modal-message" style="font-size: 1.1em; margin-bottom: 20px;"></p>
-            
             <p style="font-style: italic; color: #555;">
                 Tu apoyo es fundamental para seguir brindando esperanza en la lucha contra el cáncer.
             </p>
-            
             <button id="success-close-btn" class="admin-btn primary-btn" style="width: auto;">¡Gracias por tu apoyo!</button>
         </div>
     </div>
-
+    <div id="opciones-reserva-modal" class="admin-modal-overlay">
+        <div class="admin-modal-content">
+            <span class="opciones-reserva-close-btn admin-close-btn">&times;</span>
+            <h2 style="color: #f0ad4e;">Número Reservado: <span id="opciones-reserva-numero">0000</span></h2>
+            <p>Este número se encuentra reservado. Selecciona la acción que deseas realizar:</p>
+            <div id="opciones-reserva-botones" style="margin-top: 20px;">
+                <button id="btn-reportar-pago" class="admin-btn success-btn" style="background-color: #007bff; max-width: 90%;">
+                    ✅ Reportar mi pago
+                </button>
+                <button id="btn-admin-reserva" class="admin-btn primary-btn" style="background-color: #333; max-width: 90%;">
+                    ⚙️ Administrador
+                </button>
+                <button id="btn-cancelar-reserva-opciones" class="admin-btn secondary-btn" style="max-width: 90%;">
+                    Cancelar y Volver
+                </button>
+            </div>
+        </div>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
